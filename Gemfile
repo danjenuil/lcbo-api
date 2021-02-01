@@ -31,6 +31,9 @@ gem 'nokogiri',      require: false
 gem 'unicode_utils', require: false
 gem 'aws-sdk',       '~> 2', require: false
 
+# scheduling cron for crawling
+gem 'whenever', require: false
+
 group :development do
   gem 'pry-rails'
   gem 'web-console', '>= 3.3.0'

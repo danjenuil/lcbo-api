@@ -1,0 +1,52 @@
+FROM ruby:2.5-stretch
+
+# ENV POSTGRES_VERSION=12
+ENV NODE_DIST=10.x
+ENV PATH=/lcboapi/bin:$PATH
+ENV HOME=/lcboapi
+ENV RAILS_ENV=production
+ENV RACK_ENV=production
+
+# Install basics
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get -yqq update && \
+    apt-get -yqq install \
+    software-properties-common \
+    apt-transport-https \
+    build-essential \
+    git-core \
+    openssl \
+    libssl-dev \
+    acl \
+    zip \
+    pv \
+    postgresql-client \
+    libpq-dev \
+    nodejs \
+    yarn \
+    cron
+
+# Install Yarn.
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -y yarn
+
+RUN gem install bundler
+
+RUN mkdir -p $HOME
+
+WORKDIR $HOME
+
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN bundle install --jobs 20 --retry 5 --without development test
+
+COPY . .
+
+# Writes the crontab file
+RUN bundle exec whenever --update-crontab
+
+EXPOSE 3000
+
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb", "-p", "3000"]

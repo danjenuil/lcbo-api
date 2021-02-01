@@ -13,3 +13,11 @@ development:
 test:
   <<: *default
   database: <%= ENV['POSTGRES_TEST_DB'] %>
+
+production:
+  <<: *default
+  database: lcboapi_production
+  host: <%= ENV['POSTGRES_RDS_ENDPOINT'] %>
+  user: <%= ENV['POSTGRES_RDS_USER'] %>
+  password: <%= ENV['POSTGRES_RDS_PASSWORD'] %>
+

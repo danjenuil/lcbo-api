@@ -1,5 +1,5 @@
 class RootController < ApplicationController
-  before_action :enforce_https
+  # before_action :enforce_https
 
   def ember
     index = Rails.root + 'public/manager/index.html'
