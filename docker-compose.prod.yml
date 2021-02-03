@@ -26,11 +26,9 @@ services:
       - 80:80
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.app.prod
+    image: danjenuil/lcbo-api
     depends_on:
       - redis
     volumes:
-      - .:/lcboapi
+      - /Users/dannyjenuil/Desktop/test_log:/lcboapi/log
     env_file: .env
