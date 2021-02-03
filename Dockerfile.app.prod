@@ -22,9 +22,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
     pv \
     postgresql-client \
     libpq-dev \
-    nodejs \
-    yarn \
     cron
+
+# Install latest stable version of node.js
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+RUN apt-get install -y nodejs
 
 # Install Yarn.
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -43,6 +45,8 @@ COPY Gemfile.lock Gemfile.lock
 RUN bundle install --jobs 20 --retry 5 --without development test
 
 COPY . .
+
+RUN bundle exec rake assets:precompile
 
 # Writes the crontab file
 RUN bundle exec whenever --update-crontab
