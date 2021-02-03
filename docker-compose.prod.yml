@@ -31,4 +31,5 @@ services:
       - redis
     volumes:
       - ./log:/lcboapi/log
+      - ./public:/lcboapi/public
     env_file: .env
