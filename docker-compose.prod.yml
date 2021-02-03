@@ -30,5 +30,5 @@ services:
     depends_on:
       - redis
     volumes:
-      - /Users/dannyjenuil/Desktop/test_log:/lcboapi/log
+      - ./log:/lcboapi/log
     env_file: .env
