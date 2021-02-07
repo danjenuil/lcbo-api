@@ -46,7 +46,7 @@ RUN bundle install --jobs 20 --retry 5 --without development test
 
 COPY . .
 
-RUN bundle exec rake assets:precompile
+RUN ASSETS_PRECOMPILE=1 bundle exec rake assets:precompile
 
 # Writes the crontab file
 RUN bundle exec whenever --update-crontab
