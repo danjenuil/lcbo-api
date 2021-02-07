@@ -118,7 +118,7 @@ class Crawl < ApplicationRecord
 
   def check_if_cancelled
     return true unless state == 'cancelled'
-    AdminMailer.crawl_cancelled_message(self.id).deliver
+    # AdminMailer.crawl_cancelled_message(self.id).deliver
   end
 
   def verify_unlocked!
