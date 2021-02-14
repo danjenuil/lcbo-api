@@ -169,7 +169,7 @@ module V1
       cols    = DUMP_COLS[table].join(', ')
       sql     = "COPY #{table} (#{cols}) TO STDOUT DELIMITER ',' CSV HEADER"
 
-      `psql -U lcboapi -h #{db_host} -d #{db_name} -o #{csv_file(table)} -c "#{sql}"`
+      `psql -U postgres -h #{db_host} -d #{db_name} -o #{csv_file(table)} -c "#{sql}"`
     end
   end
 end
