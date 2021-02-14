@@ -23,7 +23,7 @@ class ImageCacher
 
   def initialize
     @s3 = Aws::S3::Client.new(
-      region: 'us-east-1',
+      region: 'us-east-2',
       credentials: Aws::Credentials.new(
         Rails.application.secrets.s3_access_key,
         Rails.application.secrets.s3_secret_key
