@@ -49,7 +49,7 @@ COPY . .
 RUN ASSETS_PRECOMPILE=1 bundle exec rake assets:precompile
 
 # Writes the crontab file
-RUN bundle exec whenever --update-crontab
+RUN bundle exec whenever --update-crontab && cron -f
 
 EXPOSE 3000
 
