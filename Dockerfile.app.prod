@@ -21,8 +21,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     zip \
     pv \
     postgresql-client \
-    libpq-dev \
-    cron
+    libpq-dev
 
 # Install latest stable version of node.js
 RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
@@ -46,10 +45,11 @@ RUN bundle install --jobs 20 --retry 5 --without development test
 
 COPY . .
 
-RUN ASSETS_PRECOMPILE=1 bundle exec rake assets:precompile
+RUN mkdir -p $HOME/log
 
-# Writes the crontab file
-RUN bundle exec whenever --update-crontab && cron
+RUN touch $HOME/log/production.log
+
+RUN ASSETS_PRECOMPILE=1 bundle exec rake assets:precompile
 
 EXPOSE 3000
 

@@ -32,4 +32,5 @@ services:
     volumes:
       - ./log:/lcboapi/log
       - ./public:/lcboapi/public
+      - ./config/secrets.yml:/lcboapi/config/secrets.yml
     env_file: .env

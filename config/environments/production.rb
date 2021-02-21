@@ -69,8 +69,8 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.smtp_settings = Rails.application.secrets.smtp
   config.action_mailer.default_url_options = {
-    host: 'lcboapi.com',
-    protocol: 'https'
+    host: Rails.application.secrets.action_mailer_host,
+    protocol: 'http'
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -86,6 +86,7 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
+  config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 50.megabytes)
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
