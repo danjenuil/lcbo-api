@@ -69,10 +69,10 @@ class Crawler < Boticus::Bot
     puts
   end
 
-  desc 'Caching product images'
-  task :cache_product_images do
-    ImageCacher.run
-  end
+  # desc 'Caching product images'
+  # task :cache_product_images do
+  #   ImageCacher.run
+  # end
 
   desc 'Crawling inventories by product'
   task :crawl_inventories do
