@@ -65,10 +65,12 @@ module LCBO
   end
 
   def product_images(id)
-    id = id.to_s.rjust(7, '0')
+    id = id.to_s.rjust(6, '0')
 
-    thumb_url = "http://www.foodanddrink.ca/assets/products/720x720/#{id}.jpg"
-    full_url  = "http://www.foodanddrink.ca/assets/products/234x234/#{id}.jpg"
+    thumb_url = "http://www.lcbo.com/content/dam/lcbo/products/#{id}.jpg/" \
+      "jcr:content/renditions/cq5dam.thumbnail.319.319.png"
+    full_url  = "http://www.lcbo.com/content/dam/lcbo/products/#{id}.jpg/" \
+      "jcr:content/renditions/cq5dam.web.1280.1280.jpeg"
 
     if Excon.head(thumb_url).status == 200
       { image_url:       full_url,
