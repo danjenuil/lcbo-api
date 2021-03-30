@@ -67,9 +67,9 @@ module LCBO
   def product_images(id)
     id = id.to_s.rjust(6, '0')
 
-    thumb_url = "http://www.lcbo.com/content/dam/lcbo/products/#{id}.jpg/" \
+    thumb_url = "https://www.lcbo.com/content/dam/lcbo/products/#{id}.jpg/" \
       "jcr:content/renditions/cq5dam.thumbnail.319.319.png"
-    full_url  = "http://www.lcbo.com/content/dam/lcbo/products/#{id}.jpg/" \
+    full_url  = "https://www.lcbo.com/content/dam/lcbo/products/#{id}.jpg/" \
       "jcr:content/renditions/cq5dam.web.1280.1280.jpeg"
 
     if Excon.head(thumb_url).status == 200
